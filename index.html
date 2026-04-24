@@ -146,9 +146,7 @@
     text-transform: uppercase;
     color: var(--text-dim);
   }
-  .spotify-wrap {
-    padding: 0 0 1rem;
-  }
+  .spotify-wrap { padding: 0 0 1rem; min-height: 352px; }
   .spotify-wrap iframe {
     display: block;
     width: 100%;
@@ -252,6 +250,21 @@
   <hr style="border: none; border-top: 0.5px solid var(--border); margin: 3rem 0 0;">
 </div>
 
+<div class="video-hero">
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/e13cJsHM6mo"
+      title="Pappelbaum — Time"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="video-caption" style="text-align: center;">
+    <p class="video-caption-text"><em>Time</em> — Ronja Polzin &amp; Nathan Vanderpool. <a href="https://nathanvanderpool.com/pappelbaum.html" target="_blank" style="color: var(--amber); text-decoration: none;">More Pappelbaum →</a></p>
+  </div>
+  <hr style="border: none; border-top: 0.5px solid var(--border); margin: 3rem 0 0;">
+</div>
+
 <section>
 
   <div class="lead">
@@ -328,20 +341,6 @@
   <div class="taster">
     <span class="taster-label">Free taster evening</span>
     <p class="taster-text">There's a free evening before the course begins — come and meet us, feel the space, and decide if it's for you. No commitment required. More details coming soon — you'll receive them automatically when you register your interest or sign up.</p>
-  </div>
-
-  <div class="video-hero" style="max-width: 100%; padding: 0; margin: 2rem 0;">
-    <div class="video-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/e13cJsHM6mo"
-        title="Pappelbaum — Time"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
-    <div class="video-caption" style="text-align: center;">
-      <p class="video-caption-text"><em>Time</em> — Ronja Polzin &amp; Nathan Vanderpool. <a href="https://nathanvanderpool.com/pappelbaum.html" target="_blank" style="color: var(--amber); text-decoration: none;">More Pappelbaum →</a></p>
-    </div>
   </div>
 
   <hr class="divider">
@@ -461,6 +460,12 @@
     <p>The muse doesn't wait for you to feel ready — and the desk is where you meet her.</p>
   </div>
 
+  <div style="max-width: 540px; margin: 0 auto 2rem;">
+    <div class="ig-wrap">
+      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/C379S15Mbal/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:0; padding:0; width:100%;"></blockquote>
+    </div>
+  </div>
+
   <hr class="divider" style="margin-top: 0;">
 
   <p class="section-label">The teachers</p>
@@ -477,12 +482,6 @@
       <p class="about-role">Visual artist · Songwriter · Co-creator, Pappelbaum</p>
       <p class="about-text">Ronja Polzin is a Berlin-based visual artist and songwriter. Her work moves between image, text, and performance — often in the spaces where disciplines dissolve into each other. She and Nathan co-created Pappelbaum, an audio-visual project whose debut EP <em>each eternal day</em> was released in late 2025. She brings a visual artist's eye to the question of how inner experience finds form.</p>
       <a href="https://www.roevardotter.de/" class="about-link" target="_blank">roevardotter.de →</a>
-    </div>
-  </div>
-
-  <div style="max-width: 540px; margin: 2rem auto 0;">
-    <div class="ig-wrap">
-      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/C379S15Mbal/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:0; padding:0; width:100%;"></blockquote>
     </div>
   </div>
 
@@ -575,7 +574,10 @@
     var btn = document.getElementById('form-toggle-btn');
     drawer.classList.add('open');
     if (btn) btn.style.display = 'none';
-    setTimeout(function() { drawer.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+    var pricing = document.querySelector('.pricing');
+    setTimeout(function() {
+      (pricing || drawer).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   }
 </script>
 </body>
