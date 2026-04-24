@@ -28,7 +28,20 @@
   .video-hero { max-width: 860px; margin: 2rem auto 0; padding: 0 2rem; }
   .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 0.5px solid var(--border); }
   .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-  .video-caption { padding: 0.9rem 0 0; }
+
+  .video-poster { position: absolute; inset: 0; cursor: pointer; background: #000; }
+  .video-poster img { width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: opacity 0.3s ease; display: block; }
+  .video-poster:hover img { opacity: 0.55; }
+  .video-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 68px; border-radius: 50%; background: rgba(200,148,58,0.92); display: flex; align-items: center; justify-content: center; transition: background 0.2s ease; pointer-events: none; }
+  .video-poster:hover .video-play-btn { background: rgba(232,184,90,0.98); }
+  .video-play-btn::after { content: ''; display: block; width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid #0d0b08; margin-left: 4px; }
+
+  .pull-quote { text-align: center; padding: 4rem 2rem; max-width: 860px; margin: 0 auto; }
+  .pull-quote p { font-family: 'IM Fell English', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 400; font-style: italic; color: var(--amber-pale); line-height: 1.25; max-width: 700px; margin: 0 auto; }
+
+  .ig-wrap { margin-top: 1.5rem; border: 0.5px solid var(--border); overflow: hidden; background: #fff; }
+  .ig-wrap blockquote { border: none !important; box-shadow: none !important; margin: 0 !important; max-width: 100% !important; min-width: 0 !important; width: 100% !important; }
+  .video-caption { padding: 0.9rem 0 0; text-align: center; }
   .video-caption-text { font-size: 0.9rem; font-style: italic; color: var(--text-muted); line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   @media (max-width: 600px) { .video-caption-text { white-space: normal; } }
   .video-caption-text em { color: var(--text); font-style: normal; }
@@ -227,15 +240,13 @@
 </header>
 
 <div class="video-hero">
-  <div class="video-wrap">
-    <iframe
-      src="https://www.youtube.com/embed/1CUUDYL68EQ"
-      title="Pappelbaum — Ronja Polzin & Nathan Vanderpool"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+  <div class="video-wrap" id="hero-video-wrap">
+    <div class="video-poster" onclick="playHeroVideo()" id="hero-poster">
+      <img src="https://img.youtube.com/vi/1CUUDYL68EQ/maxresdefault.jpg" alt="Pappelbaum — play video">
+      <div class="video-play-btn"></div>
+    </div>
   </div>
-  <div class="video-caption">
+  <div class="video-caption" style="text-align: center;">
     <p class="video-caption-text">This song was written by <em>Ronja and Nathan</em> using methods in the course — melody first, then words finding their way in. <a href="https://nathanvanderpool.com/pappelbaum.html" target="_blank" style="color: var(--amber); text-decoration: none;">More Pappelbaum →</a></p>
   </div>
   <hr style="border: none; border-top: 0.5px solid var(--border); margin: 3rem 0 0;">
@@ -328,7 +339,7 @@
         allowfullscreen>
       </iframe>
     </div>
-    <div class="video-caption">
+    <div class="video-caption" style="text-align: center;">
       <p class="video-caption-text"><em>Time</em> — Ronja Polzin &amp; Nathan Vanderpool. <a href="https://nathanvanderpool.com/pappelbaum.html" target="_blank" style="color: var(--amber); text-decoration: none;">More Pappelbaum →</a></p>
     </div>
   </div>
@@ -444,15 +455,21 @@
 
   <hr class="divider">
 
-  <blockquote>
-    "What happens when two voices refuse to become one? When folk music grows beyond its boundaries? When the space between notes matters as much as the notes themselves?"
-  </blockquote>
+  <hr class="divider">
+
+  <div class="pull-quote">
+    <p>The muse doesn't wait for you to feel ready — and the desk is where you meet her.</p>
+  </div>
+
+  <hr class="divider" style="margin-top: 0;">
+
+  <p class="section-label">The teachers</p>
 
   <div class="about-grid">
     <div class="about-card">
       <p class="about-name">Nathan Vanderpool</p>
       <p class="about-role">Songwriter · Musician · Ceremony holder</p>
-      <p class="about-text">Nathan has been writing and playing for over thirty years. He works at the intersection of song, contemplative practice, and community — his project <em>Agapic Chants</em> creates community healing songs through intimate 1:1 songwriting sessions. He holds a PhD in sociology and is the founder of the Church of Interbeing, a secular-sacred community in Berlin. His music is honest, unhurried, and made to mean something.</p>
+      <p class="about-text">Nathan has been writing and playing for over thirty years. He works at the intersection of song, contemplative practice, and community — his project <em>Agapic Chants</em> creates community healing songs through intimate 1:1 songwriting sessions. He holds a PhD in sociology and is deeply involved in the Church of Interbeing, a secular-sacred community in Berlin. His music is honest, unhurried, and made to mean something.</p>
       <a href="https://nathanvanderpool.com" class="about-link" target="_blank">nathanvanderpool.com →</a>
     </div>
     <div class="about-card">
@@ -460,6 +477,12 @@
       <p class="about-role">Visual artist · Songwriter · Co-creator, Pappelbaum</p>
       <p class="about-text">Ronja Polzin is a Berlin-based visual artist and songwriter. Her work moves between image, text, and performance — often in the spaces where disciplines dissolve into each other. She and Nathan co-created Pappelbaum, an audio-visual project whose debut EP <em>each eternal day</em> was released in late 2025. She brings a visual artist's eye to the question of how inner experience finds form.</p>
       <a href="https://www.roevardotter.de/" class="about-link" target="_blank">roevardotter.de →</a>
+    </div>
+  </div>
+
+  <div style="max-width: 540px; margin: 2rem auto 0;">
+    <div class="ig-wrap">
+      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/C379S15Mbal/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:0; padding:0; width:100%;"></blockquote>
     </div>
   </div>
 
@@ -533,7 +556,20 @@
   </div>
 </footer>
 
+<script async src="//www.instagram.com/embed.js"></script>
 <script>
+  function playHeroVideo() {
+    var wrap = document.getElementById('hero-video-wrap');
+    var poster = document.getElementById('hero-poster');
+    poster.style.display = 'none';
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/1CUUDYL68EQ?autoplay=1';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+    wrap.appendChild(iframe);
+  }
+
   function openForm() {
     var drawer = document.getElementById('form-drawer');
     var btn = document.getElementById('form-toggle-btn');
