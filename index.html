@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mystic Music — A Songwriting Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0b08; --bg2: #131109; --bg3: #1a1710;
+    --amber: #c8943a; --amber-light: #e8b85a; --amber-pale: #f5dfa0;
+    --text: #d4cbb8; --text-muted: #8a8070; --text-dim: #5a5248;
+    --border: rgba(200,148,58,0.15); --border-strong: rgba(200,148,58,0.35);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; line-height: 1.7; min-height: 100vh; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.6; }
+
+  header { padding: 4rem 2rem 0; max-width: 860px; margin: 0 auto; text-align: center; }
+  .eyebrow { font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--amber); margin-bottom: 2.5rem; }
+  h1 { font-family: 'IM Fell English', serif; font-size: clamp(3.5rem, 9vw, 7rem); font-weight: 400; color: var(--amber-pale); line-height: 1.0; letter-spacing: -0.01em; margin-bottom: 0.4rem; }
+  .subtitle-big { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--text-muted); font-weight: 300; letter-spacing: 0.05em; }
+  .ornament { color: var(--amber); font-size: 1.2rem; letter-spacing: 0.4em; margin: 2rem 0; display: block; opacity: 0.6; }
+
+  /* ——— VIDEO HERO ——— */
+  .video-hero { max-width: 860px; margin: 2rem auto 0; padding: 0 2rem; }
+  .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 0.5px solid var(--border); }
+  .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+  .video-caption { padding: 0.9rem 0 0; }
+  .video-caption-text { font-size: 0.9rem; font-style: italic; color: var(--text-muted); line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 600px) { .video-caption-text { white-space: normal; } }
+  .video-caption-text em { color: var(--text); font-style: normal; }
+  .video-caption-link { font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); text-decoration: none; white-space: nowrap; }
+  .video-caption-link:hover { color: var(--amber-light); }
+
+  .lead { max-width: 640px; margin: 0 auto 3rem; font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.75; color: var(--text); text-align: center; }
+  .lead em { color: var(--amber-light); font-style: italic; }
+
+  .divider { border: none; border-top: 0.5px solid var(--border); max-width: 480px; margin: 3.5rem auto; }
+
+  section { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  .questions { text-align: center; margin-bottom: 1rem; }
+  .questions p { font-style: italic; font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text-muted); margin-bottom: 0.6rem; line-height: 1.5; }
+  .questions p:before { content: "— "; color: var(--amber); }
+
+  .no-experience-note {
+    background: var(--bg2);
+    border: 0.5px solid var(--border-strong);
+    border-left: 2px solid var(--amber);
+    padding: 1.4rem 1.8rem;
+    margin: 0 0 2rem;
+    font-size: 1.05rem;
+    color: var(--text);
+    font-style: italic;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .no-experience-note strong {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--amber-pale);
+    font-family: 'IM Fell English', serif;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .for-you { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 2px; padding: 3rem; margin: 2rem 0; }
+  .for-you h2 { font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.5rem; }
+  .for-you ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem 2rem; }
+  .for-you li { font-size: 1.05rem; line-height: 1.5; color: var(--text); padding-left: 1.2rem; position: relative; }
+  .for-you li::before { content: '→'; position: absolute; left: 0; color: var(--amber); font-family: 'Courier Prime', monospace; font-size: 0.85rem; }
+
+  .section-label { font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--amber); margin-bottom: 2rem; text-align: center; }
+
+  .logistics { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; border: 0.5px solid var(--border); margin: 2rem 0; text-align: center; }
+  .logistics-item { flex: 1; min-width: 120px; padding: 1.5rem 1rem; border-right: 0.5px solid var(--border); }
+  .logistics-item:last-child { border-right: none; }
+  .logistics-label { font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 0.4rem; }
+  .logistics-value { font-family: 'IM Fell English', serif; font-size: 1.1rem; color: var(--amber-pale); }
+
+  .taster { background: var(--bg2); border: 0.5px solid var(--border); padding: 1.5rem 2rem; margin: 2rem 0; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .taster-label { font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); white-space: nowrap; }
+  .taster-text { font-size: 0.95rem; color: var(--text-muted); font-style: italic; flex: 1; }
+
+  .sessions { display: grid; grid-template-columns: 1fr; gap: 0; border: 0.5px solid var(--border); }
+  .session { padding: 2.8rem 3rem; border-bottom: 0.5px solid var(--border); display: grid; grid-template-columns: 3rem 1fr; gap: 0 2rem; align-items: start; background: var(--bg); transition: background 0.3s ease; }
+  .session:last-child { border-bottom: none; }
+  .session:hover { background: var(--bg2); }
+  .session.final { background: var(--bg2); }
+  .session.final:hover { background: #1c1910; }
+
+  .session-num { font-family: 'Courier Prime', monospace; font-size: 0.75rem; color: var(--amber); letter-spacing: 0.1em; padding-top: 0.35rem; opacity: 0.7; }
+  .session-title { font-family: 'IM Fell English', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; color: var(--amber-pale); margin-bottom: 0.3rem; line-height: 1.2; }
+  .session-subtitle { font-style: italic; font-size: 0.95rem; color: var(--amber); margin-bottom: 1rem; font-family: 'Cormorant Garamond', serif; font-weight: 300; letter-spacing: 0.04em; }
+  .session-desc { font-size: 1rem; line-height: 1.75; color: var(--text-muted); max-width: 580px; }
+  .session-desc em { color: var(--text); font-style: italic; }
+  .session-desc p { margin-bottom: 0.8rem; }
+  .session-desc p:last-child { margin-bottom: 0; }
+  .session-themes { margin-top: 1.2rem; font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+  .session-themes span { display: inline-block; border: 0.5px solid var(--border); padding: 3px 8px; margin: 0 4px 4px 0; border-radius: 1px; }
+  .homework { margin-top: 1rem; padding: 0.7rem 1rem; border-left: 2px solid var(--border-strong); font-size: 0.9rem; font-style: italic; color: var(--text-dim); }
+  .homework::before { content: 'Homework — '; font-style: normal; font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 0.2rem; }
+
+  /* ——— PAPPELBAUM LISTEN SECTION ——— */
+  .listen-block {
+    margin: 2rem 0;
+    border: 0.5px solid var(--border);
+    background: var(--bg2);
+  }
+  .listen-header {
+    padding: 1.5rem 2rem 0.8rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .listen-title {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.3rem;
+    color: var(--amber-pale);
+  }
+  .listen-sub {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .spotify-wrap {
+    padding: 0 0 1rem;
+  }
+  .spotify-wrap iframe {
+    display: block;
+    width: 100%;
+    border: none;
+  }
+  .listen-links {
+    padding: 0 2rem 1.5rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .listen-links a {
+    color: var(--amber);
+    text-decoration: none;
+    margin-right: 1.5rem;
+  }
+  .listen-links a:hover { color: var(--amber-light); }
+
+  /* ——— ABOUT ——— */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin: 2rem 0; }
+  .about-card { border-left: 1px solid var(--border-strong); padding-left: 1.5rem; }
+  .about-name { font-family: 'IM Fell English', serif; font-size: 1.4rem; color: var(--amber-pale); margin-bottom: 0.3rem; }
+  .about-role { font-family: 'Courier Prime', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--amber); margin-bottom: 1rem; }
+  .about-text { font-size: 0.95rem; line-height: 1.7; color: var(--text-muted); }
+  .about-text em { color: var(--text); font-style: italic; }
+  .about-link { display: inline-block; margin-top: 0.8rem; font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); text-decoration: none; }
+  .about-link:hover { color: var(--amber-light); }
+
+  blockquote { border-left: 2px solid var(--amber); padding: 1rem 0 1rem 2rem; margin: 2.5rem 0; font-style: italic; font-size: 1.2rem; color: var(--text-muted); max-width: 560px; }
+
+  /* ——— PRICING ——— */
+  .pricing { background: var(--bg2); border: 0.5px solid var(--border-strong); padding: 3.5rem 3rem; text-align: center; margin: 2rem 0; position: relative; overflow: hidden; }
+  .pricing::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0.5; }
+  .price-main { font-family: 'IM Fell English', serif; font-size: clamp(3rem, 7vw, 5rem); color: var(--amber-pale); line-height: 1; margin-bottom: 0.2rem; }
+  .price-note { font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 2rem; }
+  .price-includes { list-style: none; margin: 1.5rem auto 2rem; text-align: left; max-width: 400px; }
+  .price-includes li { font-size: 1rem; color: var(--text-muted); padding: 0.4rem 0 0.4rem 1.2rem; position: relative; border-bottom: 0.5px solid var(--border); }
+  .price-includes li:last-child { border-bottom: none; }
+  .price-includes li::before { content: '✦'; position: absolute; left: 0; color: var(--amber); font-size: 0.6rem; top: 0.7rem; }
+  .sliding-scale-note { font-size: 0.95rem; font-style: italic; color: var(--text-dim); margin-bottom: 2rem; max-width: 440px; margin-left: auto; margin-right: auto; }
+
+  .cta-group { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+  .cta-label { font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.3rem; }
+  .cta-pair { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .cta-btn { display: inline-block; font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bg); background: var(--amber); padding: 0.9rem 2.5rem; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s ease; border-radius: 1px; }
+  .cta-btn:hover { background: var(--amber-light); }
+  .cta-btn-outline { display: inline-block; font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); background: transparent; padding: 0.9rem 2.5rem; text-decoration: none; border: 0.5px solid var(--border-strong); cursor: pointer; transition: all 0.2s ease; border-radius: 1px; }
+  .cta-btn-outline:hover { color: var(--amber-light); border-color: var(--amber-light); }
+
+  footer { text-align: center; padding: 3rem 2rem 4rem; font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+  footer a { color: var(--amber); text-decoration: none; }
+  .footer-links { margin-top: 0.8rem; }
+  .footer-links a { margin: 0 0.75rem; }
+
+  @media (max-width: 640px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .session { grid-template-columns: 1fr; }
+    .session-num { padding-bottom: 0.5rem; }
+    .for-you { padding: 2rem; }
+    .logistics-item { border-right: none; border-bottom: 0.5px solid var(--border); }
+    .logistics-item:last-child { border-bottom: none; }
+  }
+
+  .register-btn { display: inline-block; font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bg); background: var(--amber); padding: 0.85rem 2.2rem; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s ease; border-radius: 1px; }
+  .register-btn:hover { background: var(--amber-light); }
+  .register-btn-wrap { text-align: center; margin: 2rem 0; }
+
+  .form-drawer { display: none; border: 0.5px solid var(--border); overflow: hidden; background: #fff; max-width: 640px; margin: 1.5rem auto 0; }
+  .form-drawer.open { display: block; animation: formOpen 0.4s ease both; }
+  @keyframes formOpen { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  header { animation: fadeUp 0.7s ease both; }
+  .lead { animation: fadeUp 0.7s ease 0.1s both; }
+  .for-you { animation: fadeUp 0.7s ease 0.15s both; }
+  .sessions { animation: fadeUp 0.7s ease 0.2s both; }
+  .about-grid { animation: fadeUp 0.7s ease 0.25s both; }
+  .pricing { animation: fadeUp 0.7s ease 0.3s both; }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Ronja Polzin &amp; Nathan Vanderpool · Berlin, Neukölln</p>
+  <h1>Mystic<br>Music</h1>
+  <p class="subtitle-big">A songwriting course in four sessions</p>
+  <span class="ornament">· · ·</span>
+</header>
+
+<div class="video-hero">
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/1CUUDYL68EQ"
+      title="Pappelbaum — Ronja Polzin & Nathan Vanderpool"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="video-caption">
+    <p class="video-caption-text">This song was written by <em>Ronja and Nathan</em> using methods in the course — melody first, then words finding their way in. <a href="https://nathanvanderpool.com/pappelbaum.html" target="_blank" style="color: var(--amber); text-decoration: none;">More Pappelbaum →</a></p>
+  </div>
+  <hr style="border: none; border-top: 0.5px solid var(--border); margin: 3rem 0 0;">
+</div>
+
+<section>
+
+  <div class="lead">
+    <p>Most songs that move us were made by people who <em>didn't know what they were doing</em> until the song was finished. Not because they were unskilled — but because they were listening for something they couldn't name yet, and they followed it anyway.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="questions" style="margin-top: -1rem;">
+    <p>Do you feel something in you that wants to be a song, but doesn't know how to become one?</p>
+    <p>Have you been writing for years but find yourself circling the same territory without going deeper?</p>
+    <p>Is there a gap between what you hear inside and what ends up on the page?</p>
+    <p>Do you want your music to mean something — and not quite know how to make that happen?</p>
+  </div>
+
+  <div class="register-btn-wrap" style="margin: 3rem 0;">
+    <button class="register-btn" onclick="openForm()">Register now</button>
+  </div>
+
+  <div class="no-experience-note">
+    <strong>You don't have to be a songwriter to join.</strong>
+    You don't have to have written a single song. If you have a feeling that music is somewhere in you and you haven't found the door yet — this course is exactly for that.
+  </div>
+
+  <hr class="divider">
+
+  <div class="lead">
+    <p>Mystic Music is an in-person songwriting course for people ready to work from the inside out. Not from formulas. Not from genre conventions. From the actual texture of your inner life — and the craft to carry it into sound.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="for-you">
+    <h2>This course is for you if</h2>
+    <ul>
+      <li>You want to write songs but have never started — or don't know how</li>
+      <li>You've written before and want to go somewhere you haven't been</li>
+      <li>You feel drawn to folk, singer-songwriter, or intimate acoustic music</li>
+      <li>You want to make music that is honest, not just impressive</li>
+      <li>You have feelings that need form and don't know how to give them one</li>
+      <li>You feel blocked around your voice and want a safe place to open it</li>
+      <li>You want to understand how melody, lyrics, and harmony work together</li>
+      <li>You want to finish something — and share it with people who matter</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <p class="section-label">Format &amp; logistics</p>
+
+  <div class="logistics">
+    <div class="logistics-item">
+      <span class="logistics-label">Sessions</span>
+      <span class="logistics-value">5 evenings</span>
+    </div>
+    <div class="logistics-item">
+      <span class="logistics-label">Time</span>
+      <span class="logistics-value">Tue 19:00–21:00</span>
+    </div>
+    <div class="logistics-item">
+      <span class="logistics-label">Location</span>
+      <span class="logistics-value">Berlin, Neukölln</span>
+    </div>
+    <div class="logistics-item">
+      <span class="logistics-label">Group size</span>
+      <span class="logistics-value">max 10 people</span>
+    </div>
+    <div class="logistics-item">
+      <span class="logistics-label">Price</span>
+      <span class="logistics-value">€350</span>
+    </div>
+  </div>
+
+  <div class="taster">
+    <span class="taster-label">Free taster evening</span>
+    <p class="taster-text">There's a free evening before the course begins — come and meet us, feel the space, and decide if it's for you. No commitment required. More details coming soon — you'll receive them automatically when you register your interest or sign up.</p>
+  </div>
+
+  <div class="video-hero" style="max-width: 100%; padding: 0; margin: 2rem 0;">
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/e13cJsHM6mo"
+        title="Pappelbaum — Time"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="video-caption">
+      <p class="video-caption-text"><em>Time</em> — Ronja Polzin &amp; Nathan Vanderpool. <a href="https://nathanvanderpool.com/pappelbaum.html" target="_blank" style="color: var(--amber); text-decoration: none;">More Pappelbaum →</a></p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="section-label">The sessions</p>
+
+  <div class="sessions">
+
+    <div class="session">
+      <div class="session-num">01</div>
+      <div class="session-body">
+        <h3 class="session-title">Arrival &amp; First Songs</h3>
+        <p class="session-subtitle">Making it safe to be a beginner</p>
+        <div class="session-desc">
+          <p>The first evening is about making it safe to be a beginner. We get to know each other and the space, share why we're here and what draws us to songwriting. Through simple singing and writing games — low stakes, often funny — we start to lower the threshold and build trust in the group.</p>
+          <p>We introduce the spirit of the whole course: <em>unvarnished enthusiasm, full commitment, no sugar-coating.</em> The muse doesn't wait for you to feel ready — and the desk is where you meet her.</p>
+        </div>
+        <div class="session-themes">
+          <span>Showing up</span>
+          <span>Pleasure as compass</span>
+          <span>The muse and the desk</span>
+        </div>
+        <div class="homework">Take a melody you love — reshape it. Make it yours.</div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-num">02</div>
+      <div class="session-body">
+        <h3 class="session-title">Melody First</h3>
+        <p class="session-subtitle">Finding the thing before you know what it means</p>
+        <div class="session-desc">
+          <p>We sing over a drone. Gibberish is welcome. La-la-la is not. The point is to find a melody that wants to exist — without the pressure of having something to say yet.</p>
+          <p>Melodies get passed between partners and small groups, played with, transformed, until they become something different — something yours. In the second half, words start to attach to the melody naturally, even if they don't make sense yet. We follow the shape of speech, the way emotion lives in a long held note.</p>
+          <p><em>This session makes space for anyone who feels blocked around their voice or scared of sounding bad.</em></p>
+        </div>
+        <div class="session-themes">
+          <span>Stealing as a starting place</span>
+          <span>Natural inflection of speech</span>
+          <span>Long notes = emotion</span>
+          <span>Melody before meaning</span>
+        </div>
+        <div class="homework">Take a melody you love — rewrite the lyrics.</div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-num">03</div>
+      <div class="session-body">
+        <h3 class="session-title">Lyrics First</h3>
+        <p class="session-subtitle">The question of whether something is too personal for a song — it isn't</p>
+        <div class="session-desc">
+          <p>Someone shares an intense or meaningful story. The group witnesses it fully — not to fix or advise, but to be truly present. Then everyone writes: a couplet, a few lines, some detail or phrase that struck them from what they heard.</p>
+          <p>We do this a few times. Then: here is a poem — pick one line that moves you and write two or three lines continuing from there. In the second half, we speak our lyrics rhythmically and begin to find their melody.</p>
+          <p><em>This session holds space for vulnerability, for the fear of exposure, for the question of whether something is too personal to put in a song.</em></p>
+        </div>
+        <div class="session-themes">
+          <span>Transmutation</span>
+          <span>Plain language</span>
+          <span>Simplicity</span>
+          <span>Writing in your mother tongue</span>
+        </div>
+        <div class="homework">Take lyrics you love — rewrite the melody.</div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-num">04</div>
+      <div class="session-body">
+        <h3 class="session-title">Chords &amp; Context</h3>
+        <p class="session-subtitle">Two chords is enough. Context changes everything.</p>
+        <div class="session-desc">
+          <p>This session demystifies the harmonic side of songwriting — how to steal a chord progression without anyone noticing, how simple instrument basics can unlock a whole new relationship to your material.</p>
+          <p>We look at how the same melody changes completely depending on what's underneath it, and practice putting it all together: <em>melody, lyrics, and harmony in the same room at the same time.</em></p>
+        </div>
+        <div class="session-themes">
+          <span>Two chords is enough</span>
+          <span>Context changes everything</span>
+          <span>Stealing progressions</span>
+          <span>Simple instrument tips</span>
+        </div>
+        <div class="homework">Bring a song — or a fragment of one — to the showcase.</div>
+      </div>
+    </div>
+
+    <div class="session final">
+      <div class="session-num">05</div>
+      <div class="session-body">
+        <h3 class="session-title">The Show</h3>
+        <p class="session-subtitle">Not a class — a concert</p>
+        <div class="session-desc">
+          <p>The final evening is not a class. It's a concert.</p>
+          <p>We take over a bar in Berlin. Ronja and Nathan perform as a band — and if you want, <em>they're your band too.</em> Anyone who wants to share what they made during the course can perform their song with full live backing. You bring the song; they follow you.</p>
+          <p>The space is safe and celebratory. We only name what we love. Nerves are welcome and will be held — this course is about songwriting, not performance, and if you just want to listen, that's completely fine.</p>
+          <p><em>Guests are welcome. Bring someone who should hear what you made.</em></p>
+        </div>
+        <div class="session-themes">
+          <span>Live performance</span>
+          <span>Full band backing</span>
+          <span>Celebration</span>
+          <span>Open to guests</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="register-btn-wrap" style="margin-top: 2.5rem;">
+    <button class="register-btn" onclick="openForm()">Register now</button>
+  </div>
+
+  <hr class="divider">
+
+  <blockquote>
+    "What happens when two voices refuse to become one? When folk music grows beyond its boundaries? When the space between notes matters as much as the notes themselves?"
+  </blockquote>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <p class="about-name">Nathan Vanderpool</p>
+      <p class="about-role">Songwriter · Musician · Ceremony holder</p>
+      <p class="about-text">Nathan has been writing and playing for over thirty years. He works at the intersection of song, contemplative practice, and community — his project <em>Agapic Chants</em> creates community healing songs through intimate 1:1 songwriting sessions. He holds a PhD in sociology and is the founder of the Church of Interbeing, a secular-sacred community in Berlin. His music is honest, unhurried, and made to mean something.</p>
+      <a href="https://nathanvanderpool.com" class="about-link" target="_blank">nathanvanderpool.com →</a>
+    </div>
+    <div class="about-card">
+      <p class="about-name">Ronja Polzin</p>
+      <p class="about-role">Visual artist · Songwriter · Co-creator, Pappelbaum</p>
+      <p class="about-text">Ronja Polzin is a Berlin-based visual artist and songwriter. Her work moves between image, text, and performance — often in the spaces where disciplines dissolve into each other. She and Nathan co-created Pappelbaum, an audio-visual project whose debut EP <em>each eternal day</em> was released in late 2025. She brings a visual artist's eye to the question of how inner experience finds form.</p>
+      <a href="https://www.roevardotter.de/" class="about-link" target="_blank">roevardotter.de →</a>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="section-label">Hear their music</p>
+
+  <div class="listen-block">
+    <div class="listen-header">
+      <span class="listen-title">Pappelbaum — <em>each eternal day</em></span>
+      <span class="listen-sub">Ronja Polzin &amp; Nathan Vanderpool</span>
+    </div>
+    <div class="spotify-wrap">
+      <iframe
+        src="https://open.spotify.com/embed/artist/1zGuLgtk8n8zzMNl2agpC3?utm_source=generator&theme=0"
+        width="100%"
+        height="352"
+        frameBorder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+    </div>
+    <div class="listen-links">
+      <a href="https://nathanvanderpool.com/pappelbaum.html" target="_blank">Full page →</a>
+      <a href="https://open.spotify.com/intl-de/artist/1zGuLgtk8n8zzMNl2agpC3" target="_blank">Spotify →</a>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="pricing">
+    <p class="price-note">Full course · 4 sessions + showcase</p>
+    <p class="price-main">€350</p>
+    <p class="price-note">In person · Berlin, Neukölln</p>
+    <ul class="price-includes">
+      <li>4 Tuesday evening sessions, 19:00–21:00</li>
+      <li>A final showcase evening with live band</li>
+      <li>Free taster evening before the course begins</li>
+      <li>Intimate group, maximum 10 people</li>
+      <li>Homework and guidance between sessions</li>
+    </ul>
+    <p class="sliding-scale-note">No one is turned away for lack of funds — write to us and we'll figure something out.</p>
+    <p class="cta-label" style="margin-bottom: 1.5rem;">Register your interest</p>
+    <button class="register-btn" onclick="openForm()" id="form-toggle-btn">Register now</button>
+    <div class="form-drawer" id="form-drawer">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLScgN09-4O-3a3Mmsb1o4pFz3WCfIOwLjeBIXAiv6w6qmkuDpA/viewform?embedded=true"
+        width="100%"
+        height="747"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        style="display: block;">
+        Loading…
+      </iframe>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+</section>
+
+<footer>
+  <p>Mystic Music · Ronja Polzin &amp; Nathan Vanderpool · Berlin, Neukölln</p>
+  <div class="footer-links">
+    <a href="https://agapicchants.com">Agapic Chants</a>
+    <a href="https://nathanvanderpool.com">Nathan</a>
+    <a href="https://www.roevardotter.de/" target="_blank">Ronja</a>
+    <a href="mailto:nathanvanderpoolphd@gmail.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+  function openForm() {
+    var drawer = document.getElementById('form-drawer');
+    var btn = document.getElementById('form-toggle-btn');
+    drawer.classList.add('open');
+    if (btn) btn.style.display = 'none';
+    setTimeout(function() { drawer.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+  }
+</script>
+</body>
+</html>
